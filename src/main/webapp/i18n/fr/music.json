@@ -1,0 +1,30 @@
+{
+    "onlinemusicApp": {
+        "music" : {
+            "home": {
+                "title": "Musics",
+                "createLabel": "Créer un nouveau Music",
+                "createOrEditLabel": "Créer ou éditer un Music",
+                "search": "Search for Music"
+            },
+            "created": "Un nouveau Music a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Music avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Music avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Music {{ id }} ?"
+            },
+            "detail": {
+                "title": "Music"
+            },
+            "head": "Head",
+            "title": "Title",
+            "album": "Album",
+            "year": "Year",
+            "comment": "Comment",
+            "cloudId": "CloudId",
+            "artist": "Artist",
+            "genre": "Genre"
+        }
+    }
+}
+

@@ -1,0 +1,20 @@
+{
+    "onlinemusicApp": {
+        "genre" : {
+            "home": {
+                "title": "Genres",
+                "createLabel": "Create a new Genre",
+                "createOrEditLabel": "Create or edit a Genre",
+                "search": "Search for Genre"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Genre {{ id }}?"
+            },
+            "detail": {
+                "title": "Genre"
+            },
+            "name": "Name",
+            "musics": "Musics"
+        }
+    }
+}

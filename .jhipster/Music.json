@@ -1,0 +1,64 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "artist",
+            "otherEntityName": "artist",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "genre",
+            "otherEntityName": "genre",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "head",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "album",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "year",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "1970",
+            "fieldValidateRulesMax": "2100"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "comment",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "cloudId",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160306133413",
+    "dto": "no",
+    "service": "serviceImpl",
+    "pagination": "infinite-scroll"
+}

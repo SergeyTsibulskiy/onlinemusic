@@ -1,0 +1,26 @@
+{
+    "onlinemusicApp": {
+        "music" : {
+            "home": {
+                "title": "Musics",
+                "createLabel": "Create a new Music",
+                "createOrEditLabel": "Create or edit a Music",
+                "search": "Search for Music"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Music {{ id }}?"
+            },
+            "detail": {
+                "title": "Music"
+            },
+            "head": "Head",
+            "title": "Title",
+            "album": "Album",
+            "year": "Year",
+            "comment": "Comment",
+            "cloudId": "CloudId",
+            "artist": "Artist",
+            "genre": "Genre"
+        }
+    }
+}

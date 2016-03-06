@@ -1,0 +1,92 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myMusicLabel" translate="onlinemusicApp.music.home.createOrEditLabel">Create or edit a Music</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="music.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="onlinemusicApp.music.head" for="field_head">Head</label>
+            <input type="text" class="form-control" name="head" id="field_head"
+                    ng-model="music.head"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="onlinemusicApp.music.title" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="music.title"
+                    required />
+            <div ng-show="editForm.title.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.title.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="onlinemusicApp.music.album" for="field_album">Album</label>
+            <input type="text" class="form-control" name="album" id="field_album"
+                    ng-model="music.album"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="onlinemusicApp.music.year" for="field_year">Year</label>
+            <input type="number" class="form-control" name="year" id="field_year"
+                    ng-model="music.year"
+                    min="1970" max="2100" />
+            <div ng-show="editForm.year.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.year.$error.min" translate="entity.validation.min" translate-value-min="1970">
+                    This field should be more than 1970.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.year.$error.max" translate="entity.validation.max" translate-value-max="2100">
+                    This field cannot be more than 2100.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.year.$error.number" translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="onlinemusicApp.music.comment" for="field_comment">Comment</label>
+            <input type="text" class="form-control" name="comment" id="field_comment"
+                    ng-model="music.comment"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="onlinemusicApp.music.cloudId" for="field_cloudId">CloudId</label>
+            <input type="text" class="form-control" name="cloudId" id="field_cloudId"
+                    ng-model="music.cloudId"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label translate="onlinemusicApp.music.artist" for="field_artist">artist</label>
+            <select class="form-control" id="field_artist" name="artist" ng-model="music.artist" ng-options="artist as artist.id for artist in artists track by artist.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="onlinemusicApp.music.genre" for="field_genre">genre</label>
+            <select class="form-control" id="field_genre" multiple name="genre" ng-model="music.genres" ng-options="genre as genre.id for genre in genres track by genre.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

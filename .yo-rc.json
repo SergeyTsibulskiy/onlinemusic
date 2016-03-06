@@ -1,0 +1,22 @@
+{
+  "generator-jhipster": {
+    "baseName": "onMgid",
+    "packageName": "com.mycompany.myapp",
+    "packageFolder": "com/mycompany/myapp",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useSass": true,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "b869e838eb2ce62d60d7c3c14654d8aac469f730",
+    "testFrameworks": [],
+    "authenticationType": "session"
+  }
+}
