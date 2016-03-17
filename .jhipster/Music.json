@@ -60,6 +60,11 @@
             "fieldId": 7,
             "fieldName": "posterUrl",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "downloadUrl",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160306133413",

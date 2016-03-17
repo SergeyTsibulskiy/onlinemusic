@@ -18,4 +18,15 @@ public class RegexpUtils {
 
         return null;
     }
+
+    public static String findByRegexp(String regexp, String source) {
+        Pattern pattern = Pattern.compile(regexp);
+        Matcher matcher = pattern.matcher(source);
+        boolean isFound = matcher.find();
+        if (isFound) {
+            return matcher.group();
+        }
+
+        return null;
+    }
 }

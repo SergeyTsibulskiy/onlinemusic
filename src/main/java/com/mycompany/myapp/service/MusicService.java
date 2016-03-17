@@ -6,6 +6,7 @@ import com.mycompany.myapp.domain.Music;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -44,7 +45,7 @@ public interface MusicService {
      */
     public List<Music> search(String query);
 
-    public Music getMetaData(InputStream inputStream) throws IOException, UnsupportedTagException, InvalidDataException;
+    public Music getMetaData(File file) throws IOException, UnsupportedTagException, InvalidDataException;
 
     public void saveMusic(String name, String contentType,  InputStream inputStream);
 }

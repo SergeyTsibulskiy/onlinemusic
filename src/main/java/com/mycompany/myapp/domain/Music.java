@@ -26,7 +26,7 @@ public class Music implements Serializable {
     private String head;
 
     @NotNull
-    @Column(name = "title", nullable = false, unique = true)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "album")
@@ -46,11 +46,14 @@ public class Music implements Serializable {
     @Column(name = "poster_url")
     private String posterUrl;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @Column(name = "download_url")
+    private String downloadUrl;
+
+    @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "music_genre",
                joinColumns = @JoinColumn(name="musics_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="genres_id", referencedColumnName="ID"))
@@ -120,6 +123,14 @@ public class Music implements Serializable {
         this.posterUrl = posterUrl;
     }
 
+    public String getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(String downloadUrl) {
+        this.downloadUrl = downloadUrl;
+    }
+
     public Artist getArtist() {
         return artist;
     }
@@ -167,6 +178,7 @@ public class Music implements Serializable {
             ", comment='" + comment + "'" +
             ", cloudId='" + cloudId + "'" +
             ", posterUrl='" + posterUrl + "'" +
+            ", downloadUrl='" + downloadUrl + "'" +
             '}';
     }
 }

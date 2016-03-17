@@ -68,7 +68,15 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="onlinemusicApp.music.artist">artist</span>
+                    <span translate="onlinemusicApp.music.downloadUrl">DownloadUrl</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.downloadUrl}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onmgidApp.music.artist">artist</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="artist.detail({id:music.artist.id})">{{music.artist.id}}</a>

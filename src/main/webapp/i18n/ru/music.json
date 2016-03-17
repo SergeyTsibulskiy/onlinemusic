@@ -20,6 +20,7 @@
             "comment": "Comment",
             "cloudId": "CloudId",
             "posterUrl": "PosterUrl",
+            "downloadUrl": "DownloadUrl",
             "artist": "Artist",
             "genre": "Genre"
         }

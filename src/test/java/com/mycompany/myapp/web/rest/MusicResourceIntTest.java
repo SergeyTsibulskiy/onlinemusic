@@ -1,6 +1,8 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.Application;
+import com.mycompany.myapp.domain.Artist;
+import com.mycompany.myapp.domain.Genre;
 import com.mycompany.myapp.domain.Music;
 import com.mycompany.myapp.repository.MusicRepository;
 import com.mycompany.myapp.service.MusicService;
@@ -24,6 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,6 +62,8 @@ public class MusicResourceIntTest {
     private static final String UPDATED_CLOUD_ID = "BBBBB";
     private static final String DEFAULT_POSTER_URL = "AAAAA";
     private static final String UPDATED_POSTER_URL = "BBBBB";
+    private static final String DEFAULT_DOWNLOAD_URL = "AAAAA";
+    private static final String UPDATED_DOWNLOAD_URL = "BBBBB";
 
     @Inject
     private MusicRepository musicRepository;
@@ -94,6 +101,7 @@ public class MusicResourceIntTest {
         music.setComment(DEFAULT_COMMENT);
         music.setCloudId(DEFAULT_CLOUD_ID);
         music.setPosterUrl(DEFAULT_POSTER_URL);
+        music.setDownloadUrl(DEFAULT_DOWNLOAD_URL);
     }
 
     @Test
@@ -119,6 +127,7 @@ public class MusicResourceIntTest {
         assertThat(testMusic.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testMusic.getCloudId()).isEqualTo(DEFAULT_CLOUD_ID);
         assertThat(testMusic.getPosterUrl()).isEqualTo(DEFAULT_POSTER_URL);
+        assertThat(testMusic.getDownloadUrl()).isEqualTo(DEFAULT_DOWNLOAD_URL);
     }
 
     @Test
@@ -156,7 +165,8 @@ public class MusicResourceIntTest {
                 .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
                 .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
                 .andExpect(jsonPath("$.[*].cloudId").value(hasItem(DEFAULT_CLOUD_ID.toString())))
-                .andExpect(jsonPath("$.[*].posterUrl").value(hasItem(DEFAULT_POSTER_URL.toString())));
+                .andExpect(jsonPath("$.[*].posterUrl").value(hasItem(DEFAULT_POSTER_URL.toString())))
+                .andExpect(jsonPath("$.[*].downloadUrl").value(hasItem(DEFAULT_DOWNLOAD_URL.toString())));
     }
 
     @Test
@@ -176,7 +186,8 @@ public class MusicResourceIntTest {
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
             .andExpect(jsonPath("$.cloudId").value(DEFAULT_CLOUD_ID.toString()))
-            .andExpect(jsonPath("$.posterUrl").value(DEFAULT_POSTER_URL.toString()));
+            .andExpect(jsonPath("$.posterUrl").value(DEFAULT_POSTER_URL.toString()))
+            .andExpect(jsonPath("$.downloadUrl").value(DEFAULT_DOWNLOAD_URL.toString()));
     }
 
     @Test
@@ -203,6 +214,9 @@ public class MusicResourceIntTest {
         music.setComment(UPDATED_COMMENT);
         music.setCloudId(UPDATED_CLOUD_ID);
         music.setPosterUrl(UPDATED_POSTER_URL);
+        music.setDownloadUrl(UPDATED_DOWNLOAD_URL);
+        Artist test = new Artist("Test");
+        music.setGenres(new HashSet<>(Collections.singletonList(new Genre("Test"))));
 
         restMusicMockMvc.perform(put("/api/musics")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -220,6 +234,7 @@ public class MusicResourceIntTest {
         assertThat(testMusic.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testMusic.getCloudId()).isEqualTo(UPDATED_CLOUD_ID);
         assertThat(testMusic.getPosterUrl()).isEqualTo(UPDATED_POSTER_URL);
+        assertThat(testMusic.getDownloadUrl()).isEqualTo(UPDATED_DOWNLOAD_URL);
     }
 
     @Test

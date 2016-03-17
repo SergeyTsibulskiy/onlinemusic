@@ -1,6 +1,5 @@
 package com.mycompany.myapp.service.impl;
 
-import com.google.api.services.drive.model.File;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -16,6 +15,8 @@ import com.mycompany.myapp.service.MusicService;
 import com.mycompany.myapp.domain.Music;
 import com.mycompany.myapp.repository.MusicRepository;
 import com.mycompany.myapp.repository.search.MusicSearchRepository;
+import com.mycompany.myapp.utils.RegexpUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -65,7 +65,6 @@ public class MusicServiceImpl implements MusicService {
 
     /**
      * Save a music.
-     *
      * @return the persisted entity
      */
     public Music save(Music music) {
@@ -78,11 +77,9 @@ public class MusicServiceImpl implements MusicService {
         return result;
     }
 
-
     /**
-     * get all the musics.
-     *
-     * @return the list of entities
+     *  get all the musics.
+     *  @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Music> findAll(Pageable pageable) {
@@ -92,9 +89,8 @@ public class MusicServiceImpl implements MusicService {
     }
 
     /**
-     * get one music by id.
-     *
-     * @return the entity
+     *  get one music by id.
+     *  @return the entity
      */
     @Transactional(readOnly = true)
     public Music findOne(Long id) {
@@ -104,7 +100,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     /**
-     * delete the  music by id.
+     *  delete the  music by id.
      */
     public void delete(Long id) {
         log.debug("Request to delete Music : {}", id);
@@ -126,12 +122,13 @@ public class MusicServiceImpl implements MusicService {
     }
 
 
-    public Music getMetaData(InputStream inputStream) throws IOException, UnsupportedTagException, InvalidDataException {
-        Mp3File mp3file = new Mp3File(stream2file(inputStream));
+    public Music getMetaData(File file) throws IOException, UnsupportedTagException, InvalidDataException {
+        Mp3File mp3file = new Mp3File(file);
         if (mp3file.hasId3v2Tag()) {
             ID3v2 id3v2Tag = mp3file.getId3v2Tag();
             Music music = new Music();
-            music.setTitle(id3v2Tag.getTitle());
+            String title = id3v2Tag.getTitle().replaceAll(" ", "_").replaceAll("/", "");
+            music.setTitle(title);
             music.setAlbum(id3v2Tag.getAlbum());
             music.setArtist(new Artist(id3v2Tag.getArtist()));
             music.setGenres(new HashSet<>(Collections.singletonList(new Genre(id3v2Tag.getGenreDescription()))));
@@ -140,7 +137,7 @@ public class MusicServiceImpl implements MusicService {
             byte[] albumImageData = id3v2Tag.getAlbumImage();
             if (albumImageData != null) {
                 String imageFormat = getImageFormat(id3v2Tag.getAlbumImageMimeType());
-                String imageUrl = saveImage(id3v2Tag.getTitle(), imageFormat, albumImageData);
+                String imageUrl = saveImage(title, imageFormat, albumImageData);
                 music.setPosterUrl(imageUrl);
             }
 
@@ -153,16 +150,24 @@ public class MusicServiceImpl implements MusicService {
 
     public void saveMusic(String name, String contentType, InputStream inputStream) {
         try {
-            Music music = this.getMetaData(inputStream);
+            byte[] bytes = IOUtils.toByteArray(inputStream);
+            File tempFile = File.createTempFile("tmp", "mp3", null);
+            FileOutputStream fos = new FileOutputStream(tempFile);
+            fos.write(bytes);
+            Music music = this.getMetaData(tempFile);
+
             if (null != music) {
                 music.setHead(name);
                 if (!isExist(music)) {
-                    File savedFile = driveService.uploadFile(name, contentType, inputStream);
+                    com.google.api.services.drive.model.File savedFile = driveService.uploadFile(name, contentType, new FileInputStream(tempFile));
                     music.setCloudId(savedFile.getId());
+                    music.setDownloadUrl(savedFile.getWebContentLink());
                     this.save(music);
                 } else {
                     log.warn("This:" + name + " song is exist");
                 }
+            } else {
+                log.warn("This:" + name + " song has wrong metadata");
             }
         } catch (IOException | UnsupportedTagException | InvalidDataException e) {
             e.printStackTrace();

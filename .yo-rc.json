@@ -1,6 +1,6 @@
 {
   "generator-jhipster": {
-    "baseName": "onMgid",
+    "baseName": "onlinemusic",
     "packageName": "com.mycompany.myapp",
     "packageFolder": "com/mycompany/myapp",
     "hibernateCache": "no",
