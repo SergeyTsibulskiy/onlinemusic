@@ -18,4 +18,5 @@ public interface MusicRepository extends JpaRepository<Music,Long> {
     @Query("select music from Music music left join fetch music.genres where music.id =:id")
     Music findOneWithEagerRelationships(@Param("id") Long id);
 
+    Music findByTitle(String title);
 }

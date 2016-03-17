@@ -6,22 +6,10 @@
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="music.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-class="hidden-xs"                        translate="onlinemusicApp.music.home.createLabel">Create new Music
+                    <span
+                        translate="onlinemusicApp.music.home.createLabel">Create new Music
                     </span>
                 </button>
-            </div>
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="searchQuery" id="searchQuery" placeholder="{{ 'onlinemusicApp.music.home.search' | translate }}">
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="search()">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -37,6 +25,7 @@ class="hidden-xs"                        translate="onlinemusicApp.music.home.cr
                     <th jh-sort-by="year"><span translate="onlinemusicApp.music.year">Year</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="comment"><span translate="onlinemusicApp.music.comment">Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="cloudId"><span translate="onlinemusicApp.music.cloudId">CloudId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="posterUrl"><span translate="onlinemusicApp.music.posterUrl">PosterUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="artist.id"><span translate="onlinemusicApp.music.artist">artist</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -50,6 +39,7 @@ class="hidden-xs"                        translate="onlinemusicApp.music.home.cr
                     <td>{{music.year}}</td>
                     <td>{{music.comment}}</td>
                     <td>{{music.cloudId}}</td>
+                    <td>{{music.posterUrl}}</td>
                     <td>
                         <a ui-sref="artist.detail({id:music.artist.id})">{{music.artist.id}}</a>
                     </td>
@@ -57,7 +47,7 @@ class="hidden-xs"                        translate="onlinemusicApp.music.home.cr
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="music.detail({id:music.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
@@ -69,7 +59,7 @@ class="hidden-xs"                        translate="onlinemusicApp.music.home.cr
                             </button>
                             <button type="submit"
                                     ui-sref="music.delete({id:music.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>

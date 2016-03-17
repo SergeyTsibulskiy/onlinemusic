@@ -27,13 +27,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ArtistServiceImpl implements ArtistService{
 
     private final Logger log = LoggerFactory.getLogger(ArtistServiceImpl.class);
-    
+
     @Inject
     private ArtistRepository artistRepository;
-    
+
     @Inject
     private ArtistSearchRepository artistSearchRepository;
-    
+
     /**
      * Save a artist.
      * @return the persisted entity
@@ -49,10 +49,10 @@ public class ArtistServiceImpl implements ArtistService{
      *  get all the artists.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Artist> findAll(Pageable pageable) {
         log.debug("Request to get all Artists");
-        Page<Artist> result = artistRepository.findAll(pageable); 
+        Page<Artist> result = artistRepository.findAll(pageable);
         return result;
     }
 
@@ -60,7 +60,7 @@ public class ArtistServiceImpl implements ArtistService{
      *  get one artist by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Artist findOne(Long id) {
         log.debug("Request to get Artist : {}", id);
         Artist artist = artistRepository.findOne(id);
@@ -80,12 +80,16 @@ public class ArtistServiceImpl implements ArtistService{
      * search for the artist corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Artist> search(String query) {
-        
+
         log.debug("REST request to search Artists for query {}", query);
         return StreamSupport
             .stream(artistSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    public Artist findByName(String name) {
+        return artistRepository.findByName(name);
     }
 }

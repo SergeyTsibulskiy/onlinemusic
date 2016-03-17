@@ -27,13 +27,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class GenreServiceImpl implements GenreService{
 
     private final Logger log = LoggerFactory.getLogger(GenreServiceImpl.class);
-    
+
     @Inject
     private GenreRepository genreRepository;
-    
+
     @Inject
     private GenreSearchRepository genreSearchRepository;
-    
+
     /**
      * Save a genre.
      * @return the persisted entity
@@ -49,10 +49,10 @@ public class GenreServiceImpl implements GenreService{
      *  get all the genres.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Genre> findAll(Pageable pageable) {
         log.debug("Request to get all Genres");
-        Page<Genre> result = genreRepository.findAll(pageable); 
+        Page<Genre> result = genreRepository.findAll(pageable);
         return result;
     }
 
@@ -60,7 +60,7 @@ public class GenreServiceImpl implements GenreService{
      *  get one genre by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Genre findOne(Long id) {
         log.debug("Request to get Genre : {}", id);
         Genre genre = genreRepository.findOne(id);
@@ -80,12 +80,17 @@ public class GenreServiceImpl implements GenreService{
      * search for the genre corresponding
      * to the query.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Genre> search(String query) {
-        
+
         log.debug("REST request to search Genres for query {}", query);
         return StreamSupport
             .stream(genreSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    public Genre findByName(String name) {
+        return genreRepository.findByName(name);
     }
 }

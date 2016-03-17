@@ -67,6 +67,7 @@ angular.module('onlinemusicApp')
                                     year: null,
                                     comment: null,
                                     cloudId: null,
+                                    posterUrl: null,
                                     id: null
                                 };
                             }

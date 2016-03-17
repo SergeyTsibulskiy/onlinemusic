@@ -23,12 +23,20 @@ public class Artist implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
+
     private String name;
-    
-    @OneToMany(mappedBy = "artist")
+
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private Set<Music> musikss = new HashSet<>();
+
+    public Artist() {
+    }
+
+    public Artist(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -41,7 +49,7 @@ public class Artist implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }

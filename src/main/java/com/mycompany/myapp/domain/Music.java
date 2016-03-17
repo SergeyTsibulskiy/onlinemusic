@@ -1,5 +1,6 @@
 package com.mycompany.myapp.domain;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -23,30 +24,33 @@ public class Music implements Serializable {
 
     @Column(name = "head")
     private String head;
-    
+
     @NotNull
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, unique = true)
     private String title;
-    
+
     @Column(name = "album")
     private String album;
-    
+
     @Min(value = 1970)
     @Max(value = 2100)
     @Column(name = "year")
     private Integer year;
-    
+
     @Column(name = "comment")
     private String comment;
-    
+
     @Column(name = "cloud_id")
     private String cloudId;
-    
-    @ManyToOne
+
+    @Column(name = "poster_url")
+    private String posterUrl;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "music_genre",
                joinColumns = @JoinColumn(name="musics_id", referencedColumnName="ID"),
                inverseJoinColumns = @JoinColumn(name="genres_id", referencedColumnName="ID"))
@@ -63,7 +67,7 @@ public class Music implements Serializable {
     public String getHead() {
         return head;
     }
-    
+
     public void setHead(String head) {
         this.head = head;
     }
@@ -71,7 +75,7 @@ public class Music implements Serializable {
     public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -79,7 +83,7 @@ public class Music implements Serializable {
     public String getAlbum() {
         return album;
     }
-    
+
     public void setAlbum(String album) {
         this.album = album;
     }
@@ -87,7 +91,7 @@ public class Music implements Serializable {
     public Integer getYear() {
         return year;
     }
-    
+
     public void setYear(Integer year) {
         this.year = year;
     }
@@ -95,7 +99,7 @@ public class Music implements Serializable {
     public String getComment() {
         return comment;
     }
-    
+
     public void setComment(String comment) {
         this.comment = comment;
     }
@@ -103,9 +107,17 @@ public class Music implements Serializable {
     public String getCloudId() {
         return cloudId;
     }
-    
+
     public void setCloudId(String cloudId) {
         this.cloudId = cloudId;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(String posterUrl) {
+        this.posterUrl = posterUrl;
     }
 
     public Artist getArtist() {
@@ -154,6 +166,7 @@ public class Music implements Serializable {
             ", year='" + year + "'" +
             ", comment='" + comment + "'" +
             ", cloudId='" + cloudId + "'" +
+            ", posterUrl='" + posterUrl + "'" +
             '}';
     }
 }

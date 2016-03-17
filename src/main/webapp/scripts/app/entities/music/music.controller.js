@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('onlinemusicApp')
-    .controller('MusicController', function ($scope, $state, Music, MusicSearch, ParseLinks) {
+    .controller('MusicController', function ($scope, $state, Music, ParseLinks) {
 
         $scope.musics = [];
         $scope.predicate = 'id';
@@ -27,16 +27,6 @@ angular.module('onlinemusicApp')
         $scope.loadAll();
 
 
-        $scope.search = function () {
-            MusicSearch.query({query: $scope.searchQuery}, function(result) {
-                $scope.musics = result;
-            }, function(response) {
-                if(response.status === 404) {
-                    $scope.loadAll();
-                }
-            });
-        };
-
         $scope.refresh = function () {
             $scope.reset();
             $scope.clear();
@@ -50,6 +40,7 @@ angular.module('onlinemusicApp')
                 year: null,
                 comment: null,
                 cloudId: null,
+                posterUrl: null,
                 id: null
             };
         };

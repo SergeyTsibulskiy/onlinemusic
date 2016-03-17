@@ -14,7 +14,7 @@ import java.util.Objects;
  * A Genre.
  */
 @Entity
-@Table(name = "genre")
+@Table(name = "genre", uniqueConstraints = @UniqueConstraint(columnNames = {"id", "name"}))
 @Document(indexName = "genre")
 public class Genre implements Serializable {
 
@@ -23,12 +23,19 @@ public class Genre implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
-    
-    @ManyToMany(mappedBy = "genres")
+
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.PERSIST)
     @JsonIgnore
     private Set<Music> musicss = new HashSet<>();
+
+    public Genre() {
+    }
+
+    public Genre(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -41,7 +48,7 @@ public class Genre implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -63,15 +70,15 @@ public class Genre implements Serializable {
             return false;
         }
         Genre genre = (Genre) o;
-        if(genre.id == null || id == null) {
+        if(genre.name == null || name == null) {
             return false;
         }
-        return Objects.equals(id, genre.id);
+        return Objects.equals(name, genre.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(name);
     }
 
     @Override

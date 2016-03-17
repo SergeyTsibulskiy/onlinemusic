@@ -39,4 +39,6 @@ public interface ArtistService {
      * to the query.
      */
     public List<Artist> search(String query);
+
+    public Artist findByName(String name);
 }

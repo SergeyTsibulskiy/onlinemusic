@@ -39,4 +39,6 @@ public interface GenreService {
      * to the query.
      */
     public List<Genre> search(String query);
+
+    public Genre findByName(String name);
 }

@@ -55,6 +55,11 @@
             "fieldId": 6,
             "fieldName": "cloudId",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "posterUrl",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160306133413",

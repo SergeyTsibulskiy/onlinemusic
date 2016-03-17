@@ -2,33 +2,48 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.api.services.drive.model.File;
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+import com.mycompany.myapp.domain.Artist;
+import com.mycompany.myapp.domain.Genre;
+import com.mycompany.myapp.domain.Music;
 import com.mycompany.myapp.service.GoogleDriveService;
-import com.mycompany.myapp.web.rest.util.PaginationUtil;
+import com.mycompany.myapp.service.MusicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashSet;
+
+import static com.mycompany.myapp.utils.RegexpUtils.getImageFormat;
+import static com.mycompany.myapp.utils.StreamUtil.saveImage;
+import static com.mycompany.myapp.utils.StreamUtil.stream2file;
 
 /**
  * REST controller for managing Drive.
  */
 @RestController
+@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DriveResource {
 
-    private final Logger log = LoggerFactory.getLogger(DriveResource.class);
+    @Autowired
+    private MusicService musicService;
 
     @Inject
     private GoogleDriveService driveService;
+
+    private final Logger log = LoggerFactory.getLogger(DriveResource.class);
 
     /**
      * GET  /musics -> get all the musics.
@@ -40,10 +55,30 @@ public class DriveResource {
     public ResponseEntity getAllMusics() throws URISyntaxException {
         log.debug("REST request to get a page of Files");
         try {
-            driveService.getFilesFromFolder("0ByyuEB-HD5xibFVtQ1NjOTZlZG8");
+
+            driveService.getFilesFromFolder(GoogleDriveService.FOLDER_ID);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    /**
+     * Upload single file using Spring Controller
+     */
+    @RequestMapping(value = "/drive/music/upload", method = RequestMethod.POST)
+    @Timed
+    @ResponseBody
+    public ResponseEntity.BodyBuilder uploadFileHandler(@RequestParam("file") MultipartFile file) {
+        try {
+            InputStream input = file.getInputStream();
+            musicService.saveMusic(file.getOriginalFilename(), file.getContentType(), input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok();
+    }
+
+
 }

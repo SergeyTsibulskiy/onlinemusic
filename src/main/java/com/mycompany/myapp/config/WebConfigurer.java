@@ -8,6 +8,7 @@ import com.mycompany.myapp.web.filter.StaticResourcesProductionFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.MultipartProperties;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.MimeMappings;
@@ -39,6 +40,9 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 
     @Autowired(required = false)
     private MetricRegistry metricRegistry;
+
+    @Inject
+    MultipartProperties factory;
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -136,5 +140,12 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
             source.registerCorsConfiguration("/oauth/**", config);
         }
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        factory.setMaxFileSize("128MB");
+        factory.setMaxRequestSize("128MB");
+        return factory.createMultipartConfig();
     }
 }

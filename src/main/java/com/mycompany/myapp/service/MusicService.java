@@ -1,9 +1,13 @@
 package com.mycompany.myapp.service;
 
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import com.mycompany.myapp.domain.Music;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -39,4 +43,8 @@ public interface MusicService {
      * to the query.
      */
     public List<Music> search(String query);
+
+    public Music getMetaData(InputStream inputStream) throws IOException, UnsupportedTagException, InvalidDataException;
+
+    public void saveMusic(String name, String contentType,  InputStream inputStream);
 }

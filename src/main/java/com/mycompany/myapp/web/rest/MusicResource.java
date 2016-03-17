@@ -35,7 +35,6 @@ public class MusicResource {
     @Inject
     private MusicService musicService;
 
-
     /**
      * POST  /musics -> Create a new music.
      */
