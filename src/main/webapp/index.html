@@ -9,12 +9,19 @@
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css assets/styles/vendor.css -->
+
+        <!-- build:css assets/styles/vendor.css -->
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css assets/styles/main.css -->
         <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="bower_components/aplayer/dist/APlayer.min.css" />
+
         <!-- endbuild -->
     </head>
     <body ng-app="onlinemusicApp">
@@ -24,10 +31,20 @@
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
         <div class="container">
-            <div class="well" ui-view="content"></div>
-
+            <div class="row">
+                <div class="well col-md-7" ui-view="content"></div>
+                <div class="col-md-4" style="margin-left: 2em;">
+                    <div ng-cloak ng-controller="PlayerController">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <aplayer load-contents="loadAll"></aplayer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="footer">
-                <p translate="footer">This is your footer</p>
+                <p>This is footer</p>
             </div>
         </div>
 
@@ -68,6 +85,8 @@
         <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
+
+        <script src="bower_components/lodash/dist/lodash.min.js"></script>
 
 
     <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
@@ -182,9 +201,23 @@
     <script src="scripts/components/entities/music/music.search.service.js"></script>
     <!-- endbuild -->
 
+
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+        <!-- Angular Material Library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
         <script src="scripts/app/main/music/music.js"></script>
         <script src="scripts/app/main/music/music.service.js"></script>
         <script src="scripts/app/main/music/upload/upload.controller.js"></script>
+        <script src="scripts/app/main/music/player/player.controller.js"></script>
+        <script src="scripts/app/main/music/player/player.directive.js"></script>
+
+        <script src="bower_components/aplayer/src/APlayer.js"></script>
 
 </body>
 </html>

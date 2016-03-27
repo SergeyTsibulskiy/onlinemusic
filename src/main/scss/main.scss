@@ -266,7 +266,7 @@ ul#strength {
    flex-direction: row;
    -webkit-justify-content: flex-end;
    justify-content: flex-end;
-}  
+}
 
 /* Align text in td verifically (top aligned by Bootstrap) */
 .jh-table > tbody > tr > td {
@@ -275,3 +275,22 @@ ul#strength {
 /* end of entity tables helpers */
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+
+.development {
+    width: 89px !important;
+    height: 89px !important;
+    background-size: 100% !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+
+div#player1 {
+    margin-bottom: 0px;
+}

@@ -8,11 +8,11 @@ angular.module('onlinemusicApp')
         });
 
         $scope.uploadFile = function () {
-            var file = document.getElementById('file').files[0];
-            // DriveMusic.uploadFile({name: file.name, file: file} , {name: file.name, file: file});
+            var files = document.getElementById('file').files[0];
+            // DriveMusic.uploadFileToServer({files: files} , {files: files});
 
             var formData = new FormData();
-            formData.append('file',file);
+            formData.append('file', files);
 
             $http.post('/api/drive/music/upload/',  formData, {
                 headers: { 'Content-Type': undefined },

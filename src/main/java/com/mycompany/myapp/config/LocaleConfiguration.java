@@ -11,6 +11,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
@@ -46,4 +47,10 @@ public class LocaleConfiguration extends WebMvcConfigurerAdapter implements Envi
         localeChangeInterceptor.setParamName("language");
         registry.addInterceptor(localeChangeInterceptor);
     }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/images").addResourceLocations("/resources/images");
+    }
+
 }

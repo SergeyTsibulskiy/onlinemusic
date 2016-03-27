@@ -18,8 +18,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -81,5 +83,17 @@ public class DriveResource {
         return ResponseEntity.ok();
     }
 
+    /**
+     * Upload multiple file using Spring Controller
+     */
+    @RequestMapping(value = "drive/music/uploads", method = RequestMethod.POST)
+    public @ResponseBody
+    String uploadMultipleFileHandler(HttpServletRequest request) {
+
+        String message = "";
+
+
+        return message;
+    }
 
 }

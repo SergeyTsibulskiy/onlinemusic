@@ -1,5 +1,6 @@
 package com.mycompany.myapp.repository;
 
+import com.mycompany.myapp.domain.Genre;
 import com.mycompany.myapp.domain.Music;
 
 import org.springframework.data.jpa.repository.*;
