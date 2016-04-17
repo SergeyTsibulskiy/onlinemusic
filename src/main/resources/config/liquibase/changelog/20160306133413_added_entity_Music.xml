@@ -37,6 +37,8 @@
             
             <column name="download_url" type="varchar(255)"/>
             
+            <column name="duration" type="integer"/>
+            
             <column name="artist_id" type="bigint"/>
             <column name="album_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->

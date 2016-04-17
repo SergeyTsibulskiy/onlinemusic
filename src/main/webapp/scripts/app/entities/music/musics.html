@@ -26,6 +26,7 @@
                     <th jh-sort-by="cloudId"><span translate="onlinemusicApp.music.cloudId">CloudId</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="posterUrl"><span translate="onlinemusicApp.music.posterUrl">PosterUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="downloadUrl"><span translate="onlinemusicApp.music.downloadUrl">DownloadUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="duration"><span translate="onlinemusicApp.music.duration">Duration</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="artist.id"><span translate="onlinemusicApp.music.artist">artist</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="album.id"><span translate="onlinemusicApp.music.album">album</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -41,6 +42,7 @@
                     <td>{{music.cloudId}}</td>
                     <td>{{music.posterUrl}}</td>
                     <td>{{music.downloadUrl}}</td>
+                    <td>{{music.duration}}</td>
                     <td>
                         <a ui-sref="artist.detail({id:music.artist.id})">{{music.artist.id}}</a>
                     </td>

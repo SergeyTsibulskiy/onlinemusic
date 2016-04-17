@@ -58,6 +58,9 @@ public class MusicResourceIntTest {
     private static final String DEFAULT_DOWNLOAD_URL = "AAAAA";
     private static final String UPDATED_DOWNLOAD_URL = "BBBBB";
 
+    private static final Integer DEFAULT_DURATION = 1;
+    private static final Integer UPDATED_DURATION = 2;
+
     @Inject
     private MusicRepository musicRepository;
 
@@ -94,6 +97,7 @@ public class MusicResourceIntTest {
         music.setCloudId(DEFAULT_CLOUD_ID);
         music.setPosterUrl(DEFAULT_POSTER_URL);
         music.setDownloadUrl(DEFAULT_DOWNLOAD_URL);
+        music.setDuration(DEFAULT_DURATION);
     }
 
     @Test
@@ -119,6 +123,7 @@ public class MusicResourceIntTest {
         assertThat(testMusic.getCloudId()).isEqualTo(DEFAULT_CLOUD_ID);
         assertThat(testMusic.getPosterUrl()).isEqualTo(DEFAULT_POSTER_URL);
         assertThat(testMusic.getDownloadUrl()).isEqualTo(DEFAULT_DOWNLOAD_URL);
+        assertThat(testMusic.getDuration()).isEqualTo(DEFAULT_DURATION);
     }
 
     @Test
@@ -156,7 +161,8 @@ public class MusicResourceIntTest {
                 .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
                 .andExpect(jsonPath("$.[*].cloudId").value(hasItem(DEFAULT_CLOUD_ID.toString())))
                 .andExpect(jsonPath("$.[*].posterUrl").value(hasItem(DEFAULT_POSTER_URL.toString())))
-                .andExpect(jsonPath("$.[*].downloadUrl").value(hasItem(DEFAULT_DOWNLOAD_URL.toString())));
+                .andExpect(jsonPath("$.[*].downloadUrl").value(hasItem(DEFAULT_DOWNLOAD_URL.toString())))
+                .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)));
     }
 
     @Test
@@ -176,7 +182,8 @@ public class MusicResourceIntTest {
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
             .andExpect(jsonPath("$.cloudId").value(DEFAULT_CLOUD_ID.toString()))
             .andExpect(jsonPath("$.posterUrl").value(DEFAULT_POSTER_URL.toString()))
-            .andExpect(jsonPath("$.downloadUrl").value(DEFAULT_DOWNLOAD_URL.toString()));
+            .andExpect(jsonPath("$.downloadUrl").value(DEFAULT_DOWNLOAD_URL.toString()))
+            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION));
     }
 
     @Test
@@ -203,6 +210,7 @@ public class MusicResourceIntTest {
         music.setCloudId(UPDATED_CLOUD_ID);
         music.setPosterUrl(UPDATED_POSTER_URL);
         music.setDownloadUrl(UPDATED_DOWNLOAD_URL);
+        music.setDuration(UPDATED_DURATION);
 
         restMusicMockMvc.perform(put("/api/musics")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -220,6 +228,7 @@ public class MusicResourceIntTest {
         assertThat(testMusic.getCloudId()).isEqualTo(UPDATED_CLOUD_ID);
         assertThat(testMusic.getPosterUrl()).isEqualTo(UPDATED_POSTER_URL);
         assertThat(testMusic.getDownloadUrl()).isEqualTo(UPDATED_DOWNLOAD_URL);
+        assertThat(testMusic.getDuration()).isEqualTo(UPDATED_DURATION);
     }
 
     @Test

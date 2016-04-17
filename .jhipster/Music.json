@@ -67,6 +67,11 @@
             "fieldId": 8,
             "fieldName": "downloadUrl",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "duration",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20160306133413",

@@ -1,50 +1,46 @@
-<div class="row" ng-controller="PosterController">
-    <div class="container">
-        <div class="player">
-            <div class="like waves-effect waves-light">
-                <i class="icon-heart"></i>
-            </div>
-            <div class="mask"></div>
-            <ul class="player-info info-one">
-                <li>Rock'n'Roll Nerd</li>
-                <li>Tim Minchin</li>
-                <li>5:34</li>
-            </ul>
-            <ul class="player-info info-two">
-                <li>Rock'n'Roll Nerd</li>
-                <li>Tim Minchin</li>
-                <li><span id="duration"></span><i> / </i>5:34</li>
-            </ul>
-            <div id="play-button" class="unchecked">
-                <i class="icon icon-play"></i>
-            </div>
-            <div class="control-row">
-                <div class="waves-animation-one"></div>
-                <div class="waves-animation-two"></div>
-                <div id="pause-button">
-                    <i class="icon"></i>
+<div class="row" ng-controller="PosterController" ng-init="loadAll()">
+    <div class="poster-wrapper" ng-repeat="music in musics">
+        <div class="container">
+            <div class="player" style='background-image: url("{{music.pic}}");'>
+                <div class="like waves-effect waves-light">
+                    <i class="icon-heart"></i>
                 </div>
-                <div class="seek-field">
-                    <input id="audioSeekBar" min="0" max="334" step="1" value="0" type="range">
+                <div class="mask"></div>
+                <ul class="player-info info-one">
+                    <li>{{music.title}}</li>
+                    <li>{{music.author}}</li>
+                    <li>{{music.duration.hours()}}h {{music.duration.minutes()}}m {{music.duration.seconds()}}s</li>
+                </ul>
+                <ul class="player-info info-two">
+                    <li>{{music.title}}</li>
+                    <li>{{music.author}}</li>
+                    <li><span class="duration"></span><i> / </i>{{music.duration.hours()}}h {{music.duration.minutes()}}m {{music.duration.seconds()}}s</li>
+                </ul>
+                <div class="play-button unchecked">
+                    <i class="icon icon-play"></i>
                 </div>
-                <div class="volume-icon">
-                    <i class="icon-volume-up"></i>
-                </div>
-                <div class="volume-field">
-                    <input id="audioVolume" type="range" min="0" max="100" value="100" step="1">
+                <div class="control-row">
+                    <div class="waves-animation-one"></div>
+                    <div class="waves-animation-two"></div>
+                    <div class="pause-button">
+                        <i class="icon"></i>
+                    </div>
+                    <div class="seek-field">
+                        <input class="audioSeekBar" min="0" max="334" step="1" value="0" type="range">
+                    </div>
+                    <div class="volume-icon">
+                        <i class="icon-volume-up"></i>
+                    </div>
+                    <div class="volume-field">
+                        <input class="audioVolume" type="range" min="0" max="100" value="100" step="1">
+                    </div>
                 </div>
             </div>
         </div>
+        <audio class="audio-player" preload="auto" loop>
+            <source src="{{music.url}}" type="audio/mp3">
+        </audio>
     </div>
-    <audio id="audio-player" preload="auto" loop>
-        <source src="https://www.googledrive.com/host/0B8ExDrngxZU8aEQwdnlWOUVWOVk" type="audio/ogg">
-        <source src="https://www.googledrive.com/host/0B8ExDrngxZU8dVllbURCRVRNaG8" type="audio/mpeg">
-    </audio>
+
 </div>
-<script>
-
-    $(document).ready(function() {
-        var audio = document.getElementById("audio-player");
-    });
-
-</script>
+<script src="/scripts/app/main/music/poster/poster.handlers.js"></script>

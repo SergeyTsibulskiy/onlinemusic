@@ -46,6 +46,9 @@ public class Music implements Serializable {
     @Column(name = "download_url")
     private String downloadUrl;
 
+    @Column(name = "duration")
+    private Integer duration;
+
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
@@ -124,6 +127,14 @@ public class Music implements Serializable {
         this.downloadUrl = downloadUrl;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
     public Artist getArtist() {
         return artist;
     }
@@ -179,6 +190,7 @@ public class Music implements Serializable {
             ", cloudId='" + cloudId + "'" +
             ", posterUrl='" + posterUrl + "'" +
             ", downloadUrl='" + downloadUrl + "'" +
+            ", duration='" + duration + "'" +
             '}';
     }
 }

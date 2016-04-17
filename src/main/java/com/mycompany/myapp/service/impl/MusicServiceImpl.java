@@ -134,6 +134,7 @@ public class MusicServiceImpl implements MusicService{
             music.setArtist(new Artist(id3v2Tag.getArtist()));
             music.setGenres(new HashSet<>(Collections.singletonList(new Genre(id3v2Tag.getGenreDescription()))));
             music.setYear(id3v2Tag.getYear() != null ? Integer.parseInt(id3v2Tag.getYear()) : 1970);
+            music.setDuration((int) mp3file.getLengthInMilliseconds());
 
             byte[] albumImageData = id3v2Tag.getAlbumImage();
             if (albumImageData != null) {

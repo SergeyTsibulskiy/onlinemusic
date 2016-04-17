@@ -298,7 +298,6 @@ div#player1 {
 .poster-music {
     font-family: Roboto, sans-serif;
     .container {
-        position: absolute;
         width: 100%;
         height: 100%;
         display: flex;
@@ -308,8 +307,8 @@ div#player1 {
 
     .player {
         position: relative;
-        background-color: #ffffff;
-        background-image: url("https://www.googledrive.com/host/0B8ExDrngxZU8NzJ3dTN2aTR4RXc");
+        background: #ffffff url("https://www.googledrive.com/host/0B8ExDrngxZU8NzJ3dTN2aTR4RXc") no-repeat;
+        background-size: 100%;
         width: 550px;
         height: 375px;
         border-radius: 3px;
@@ -380,7 +379,7 @@ div#player1 {
                 clear: both;
             }
         }
-        & #play-button {
+        & .play-button {
             box-sizing: border-box;
             position: absolute;
             width: 80px;
@@ -434,7 +433,7 @@ div#player1 {
         background-color: #ffffff;
         overflow: hidden;
         z-index: 3;
-        & #pause-button {
+        & .pause-button {
             box-sizing: border-box;
             position: absolute;
             width: 80px;
