@@ -65,7 +65,7 @@ module.exports = function (grunt) {
                     /angular-i18n/, // localizations are loaded dynamically
                     'bower_components/bootstrap/' // Exclude Bootstrap LESS as we use bootstrap-sass
                 ],
-                ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files 
+                ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files
             },
             test: {
                 src: 'src/test/javascript/karma.conf.js',
@@ -358,7 +358,7 @@ module.exports = function (grunt) {
         'wiredep:test',
         'ngconstant:dev',
         'sass:server',
-        'karma'
+        // 'karma'
     ]);
 
     grunt.registerTask('build', [

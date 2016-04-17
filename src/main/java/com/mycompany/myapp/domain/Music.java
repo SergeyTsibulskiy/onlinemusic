@@ -29,9 +29,6 @@ public class Music implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "album")
-    private String album;
-
     @Min(value = 1970)
     @Max(value = 2100)
     @Column(name = "year")
@@ -59,6 +56,10 @@ public class Music implements Serializable {
                inverseJoinColumns = @JoinColumn(name="genres_id", referencedColumnName="ID"))
     private Set<Genre> genres = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "album_id")
+    private Album album;
+
     public Long getId() {
         return id;
     }
@@ -81,14 +82,6 @@ public class Music implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(String album) {
-        this.album = album;
     }
 
     public Integer getYear() {
@@ -147,6 +140,14 @@ public class Music implements Serializable {
         this.genres = genres;
     }
 
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -173,7 +174,6 @@ public class Music implements Serializable {
             "id=" + id +
             ", head='" + head + "'" +
             ", title='" + title + "'" +
-            ", album='" + album + "'" +
             ", year='" + year + "'" +
             ", comment='" + comment + "'" +
             ", cloudId='" + cloudId + "'" +

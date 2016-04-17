@@ -14,6 +14,13 @@
             "relationshipType": "many-to-many",
             "otherEntityField": "id",
             "ownerSide": true
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "album",
+            "otherEntityName": "album",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -29,11 +36,6 @@
             "fieldValidateRules": [
                 "required"
             ]
-        },
-        {
-            "fieldId": 3,
-            "fieldName": "album",
-            "fieldType": "String"
         },
         {
             "fieldId": 4,

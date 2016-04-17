@@ -1,8 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.Application;
-import com.mycompany.myapp.domain.Artist;
-import com.mycompany.myapp.domain.Genre;
 import com.mycompany.myapp.domain.Music;
 import com.mycompany.myapp.repository.MusicRepository;
 import com.mycompany.myapp.service.MusicService;
@@ -26,9 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,8 +46,6 @@ public class MusicResourceIntTest {
     private static final String UPDATED_HEAD = "BBBBB";
     private static final String DEFAULT_TITLE = "AAAAA";
     private static final String UPDATED_TITLE = "BBBBB";
-    private static final String DEFAULT_ALBUM = "AAAAA";
-    private static final String UPDATED_ALBUM = "BBBBB";
 
     private static final Integer DEFAULT_YEAR = 1970;
     private static final Integer UPDATED_YEAR = 1971;
@@ -96,7 +89,6 @@ public class MusicResourceIntTest {
         music = new Music();
         music.setHead(DEFAULT_HEAD);
         music.setTitle(DEFAULT_TITLE);
-        music.setAlbum(DEFAULT_ALBUM);
         music.setYear(DEFAULT_YEAR);
         music.setComment(DEFAULT_COMMENT);
         music.setCloudId(DEFAULT_CLOUD_ID);
@@ -122,7 +114,6 @@ public class MusicResourceIntTest {
         Music testMusic = musics.get(musics.size() - 1);
         assertThat(testMusic.getHead()).isEqualTo(DEFAULT_HEAD);
         assertThat(testMusic.getTitle()).isEqualTo(DEFAULT_TITLE);
-        assertThat(testMusic.getAlbum()).isEqualTo(DEFAULT_ALBUM);
         assertThat(testMusic.getYear()).isEqualTo(DEFAULT_YEAR);
         assertThat(testMusic.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testMusic.getCloudId()).isEqualTo(DEFAULT_CLOUD_ID);
@@ -161,7 +152,6 @@ public class MusicResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(music.getId().intValue())))
                 .andExpect(jsonPath("$.[*].head").value(hasItem(DEFAULT_HEAD.toString())))
                 .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-                .andExpect(jsonPath("$.[*].album").value(hasItem(DEFAULT_ALBUM.toString())))
                 .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
                 .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())))
                 .andExpect(jsonPath("$.[*].cloudId").value(hasItem(DEFAULT_CLOUD_ID.toString())))
@@ -182,7 +172,6 @@ public class MusicResourceIntTest {
             .andExpect(jsonPath("$.id").value(music.getId().intValue()))
             .andExpect(jsonPath("$.head").value(DEFAULT_HEAD.toString()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
-            .andExpect(jsonPath("$.album").value(DEFAULT_ALBUM.toString()))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()))
             .andExpect(jsonPath("$.cloudId").value(DEFAULT_CLOUD_ID.toString()))
@@ -209,14 +198,11 @@ public class MusicResourceIntTest {
         // Update the music
         music.setHead(UPDATED_HEAD);
         music.setTitle(UPDATED_TITLE);
-        music.setAlbum(UPDATED_ALBUM);
         music.setYear(UPDATED_YEAR);
         music.setComment(UPDATED_COMMENT);
         music.setCloudId(UPDATED_CLOUD_ID);
         music.setPosterUrl(UPDATED_POSTER_URL);
         music.setDownloadUrl(UPDATED_DOWNLOAD_URL);
-        Artist test = new Artist("Test");
-        music.setGenres(new HashSet<>(Collections.singletonList(new Genre("Test"))));
 
         restMusicMockMvc.perform(put("/api/musics")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -229,7 +215,6 @@ public class MusicResourceIntTest {
         Music testMusic = musics.get(musics.size() - 1);
         assertThat(testMusic.getHead()).isEqualTo(UPDATED_HEAD);
         assertThat(testMusic.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testMusic.getAlbum()).isEqualTo(UPDATED_ALBUM);
         assertThat(testMusic.getYear()).isEqualTo(UPDATED_YEAR);
         assertThat(testMusic.getComment()).isEqualTo(UPDATED_COMMENT);
         assertThat(testMusic.getCloudId()).isEqualTo(UPDATED_CLOUD_ID);

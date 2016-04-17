@@ -1,5 +1,5 @@
 <div>
-    <h2 translate="onmgidApp.music.home.title">Musics</h2>
+    <h2 translate="onlinemusicApp.music.home.title">Musics</h2>
     <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
@@ -7,7 +7,7 @@
                 <button class="btn btn-primary" ui-sref="music.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span 
-                        translate="onmgidApp.music.home.createLabel">Create new Music
+                        translate="onlinemusicApp.music.home.createLabel">Create new Music
                     </span>
                 </button>
             </div>
@@ -19,15 +19,15 @@
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="reset()">
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="head"><span translate="onmgidApp.music.head">Head</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="title"><span translate="onmgidApp.music.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="album"><span translate="onmgidApp.music.album">Album</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="year"><span translate="onmgidApp.music.year">Year</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="comment"><span translate="onmgidApp.music.comment">Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="cloudId"><span translate="onmgidApp.music.cloudId">CloudId</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="posterUrl"><span translate="onmgidApp.music.posterUrl">PosterUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="downloadUrl"><span translate="onmgidApp.music.downloadUrl">DownloadUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="artist.id"><span translate="onmgidApp.music.artist">artist</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="head"><span translate="onlinemusicApp.music.head">Head</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span translate="onlinemusicApp.music.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="year"><span translate="onlinemusicApp.music.year">Year</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comment"><span translate="onlinemusicApp.music.comment">Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cloudId"><span translate="onlinemusicApp.music.cloudId">CloudId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="posterUrl"><span translate="onlinemusicApp.music.posterUrl">PosterUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="downloadUrl"><span translate="onlinemusicApp.music.downloadUrl">DownloadUrl</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="artist.id"><span translate="onlinemusicApp.music.artist">artist</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="album.id"><span translate="onlinemusicApp.music.album">album</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -36,7 +36,6 @@
                     <td><a ui-sref="music.detail({id:music.id})">{{music.id}}</a></td>
                     <td>{{music.head}}</td>
                     <td>{{music.title}}</td>
-                    <td>{{music.album}}</td>
                     <td>{{music.year}}</td>
                     <td>{{music.comment}}</td>
                     <td>{{music.cloudId}}</td>
@@ -44,6 +43,9 @@
                     <td>{{music.downloadUrl}}</td>
                     <td>
                         <a ui-sref="artist.detail({id:music.artist.id})">{{music.artist.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="album.detail({id:music.album.id})">{{music.album.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

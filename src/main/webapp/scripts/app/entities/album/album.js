@@ -3,123 +3,117 @@
 angular.module('onlinemusicApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('music', {
+            .state('album', {
                 parent: 'entity',
-                url: '/musics',
+                url: '/albums',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'onlinemusicApp.music.home.title'
+                    pageTitle: 'onlinemusicApp.album.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/music/musics.html',
-                        controller: 'MusicController'
+                        templateUrl: 'scripts/app/entities/album/albums.html',
+                        controller: 'AlbumController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('music');
+                        $translatePartialLoader.addPart('album');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
                 }
             })
-            .state('music.detail', {
+            .state('album.detail', {
                 parent: 'entity',
-                url: '/music/{id}',
+                url: '/album/{id}',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'onlinemusicApp.music.detail.title'
+                    pageTitle: 'onlinemusicApp.album.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/music/music-detail.html',
-                        controller: 'MusicDetailController'
+                        templateUrl: 'scripts/app/entities/album/album-detail.html',
+                        controller: 'AlbumDetailController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('music');
+                        $translatePartialLoader.addPart('album');
                         return $translate.refresh();
                     }],
-                    entity: ['$stateParams', 'Music', function($stateParams, Music) {
-                        return Music.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'Album', function($stateParams, Album) {
+                        return Album.get({id : $stateParams.id});
                     }]
                 }
             })
-            .state('music.new', {
-                parent: 'music',
+            .state('album.new', {
+                parent: 'album',
                 url: '/new',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/music/music-dialog.html',
-                        controller: 'MusicDialogController',
+                        templateUrl: 'scripts/app/entities/album/album-dialog.html',
+                        controller: 'AlbumDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
                                 return {
-                                    head: null,
-                                    title: null,
-                                    year: null,
-                                    comment: null,
-                                    cloudId: null,
-                                    posterUrl: null,
-                                    downloadUrl: null,
+                                    name: null,
                                     id: null
                                 };
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('music', null, { reload: true });
+                        $state.go('album', null, { reload: true });
                     }, function() {
-                        $state.go('music');
+                        $state.go('album');
                     })
                 }]
             })
-            .state('music.edit', {
-                parent: 'music',
+            .state('album.edit', {
+                parent: 'album',
                 url: '/{id}/edit',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/music/music-dialog.html',
-                        controller: 'MusicDialogController',
+                        templateUrl: 'scripts/app/entities/album/album-dialog.html',
+                        controller: 'AlbumDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['Music', function(Music) {
-                                return Music.get({id : $stateParams.id});
+                            entity: ['Album', function(Album) {
+                                return Album.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('music', null, { reload: true });
+                        $state.go('album', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('music.delete', {
-                parent: 'music',
+            .state('album.delete', {
+                parent: 'album',
                 url: '/{id}/delete',
                 data: {
                     authorities: ['ROLE_USER'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/music/music-delete-dialog.html',
-                        controller: 'MusicDeleteController',
+                        templateUrl: 'scripts/app/entities/album/album-delete-dialog.html',
+                        controller: 'AlbumDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['Music', function(Music) {
-                                return Music.get({id : $stateParams.id});
+                            entity: ['Album', function(Album) {
+                                return Album.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('music', null, { reload: true });
+                        $state.go('album', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

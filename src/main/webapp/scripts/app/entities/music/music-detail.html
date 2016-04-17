@@ -28,14 +28,6 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="onlinemusicApp.music.album">Album</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{music.album}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="onlinemusicApp.music.year">Year</span>
                 </td>
                 <td>
@@ -76,7 +68,7 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="onmgidApp.music.artist">artist</span>
+                    <span translate="onlinemusicApp.music.artist">artist</span>
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="artist.detail({id:music.artist.id})">{{music.artist.id}}</a>
@@ -90,6 +82,14 @@
                     <span ng-repeat="genre in music.genres">
                         <a class="form-control-static" ui-sref="genre.detail({id: {{genre.id}}})">{{genre.id}}</a>{{$last ? '' : ', '}}
                     </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.album">album</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="album.detail({id:music.album.id})">{{music.album.id}}</a>
                 </td>
             </tr>
             </tbody>

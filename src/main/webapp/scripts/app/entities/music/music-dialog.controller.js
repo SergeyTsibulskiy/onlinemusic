@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('onlinemusicApp').controller('MusicDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Music', 'Artist', 'Genre',
-        function($scope, $stateParams, $uibModalInstance, entity, Music, Artist, Genre) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Music', 'Artist', 'Genre', 'Album',
+        function($scope, $stateParams, $uibModalInstance, entity, Music, Artist, Genre, Album) {
 
         $scope.music = entity;
         $scope.artists = Artist.query();
         $scope.genres = Genre.query();
+        $scope.albums = Album.query();
         $scope.load = function(id) {
             Music.get({id : id}, function(result) {
                 $scope.music = result;

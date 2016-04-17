@@ -1,0 +1,25 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 3,
+            "relationshipName": "musiks",
+            "otherEntityName": "music",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "album"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160306132517",
+    "dto": "no",
+    "service": "serviceImpl",
+    "pagination": "infinite-scroll"
+}

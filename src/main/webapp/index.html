@@ -23,6 +23,10 @@
         <link rel="stylesheet" href="bower_components/aplayer/dist/APlayer.min.css" />
 
         <!-- endbuild -->
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100italic,100,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+        <link href='https://e42d6aaa9c0626ea50aa193fca21c97a416e946e-www.googledrive.com/host/0B8ExDrngxZU8YjNQS19zaHBPcms' rel='stylesheet' type='text/css'>
+
     </head>
     <body ng-app="onlinemusicApp">
         <!--[if lt IE 9]>
@@ -83,6 +87,8 @@
         <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
         <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
         <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+        <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
+        <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -199,6 +205,12 @@
     <script src="scripts/app/entities/music/music-detail.controller.js"></script>
     <script src="scripts/components/entities/music/music.service.js"></script>
     <script src="scripts/components/entities/music/music.search.service.js"></script>
+    <script src="scripts/app/entities/album/album.js"></script>
+    <script src="scripts/app/entities/album/album.controller.js"></script>
+    <script src="scripts/app/entities/album/album-dialog.controller.js"></script>
+    <script src="scripts/app/entities/album/album-delete-dialog.controller.js"></script>
+    <script src="scripts/app/entities/album/album-detail.controller.js"></script>
+    <script src="scripts/components/entities/album/album.service.js"></script>
     <!-- endbuild -->
 
 
@@ -216,6 +228,9 @@
         <script src="scripts/app/main/music/upload/upload.controller.js"></script>
         <script src="scripts/app/main/music/player/player.controller.js"></script>
         <script src="scripts/app/main/music/player/player.directive.js"></script>
+
+        <script src="scripts/app/main/music/poster/poster.controller.js"></script>
+        <script src="scripts/app/main/music/poster/poster.directive.js"></script>
 
         <script src="bower_components/aplayer/src/APlayer.js"></script>
 

@@ -32,12 +32,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" translate="onlinemusicApp.music.album" for="field_album">Album</label>
-            <input type="text" class="form-control" name="album" id="field_album"
-                    ng-model="music.album"
-                     />
-        </div>
-        <div class="form-group">
             <label class="control-label" translate="onlinemusicApp.music.year" for="field_year">Year</label>
             <input type="number" class="form-control" name="year" id="field_year"
                     ng-model="music.year"
@@ -83,7 +77,7 @@
         </div>
 
         <div class="form-group">
-            <label translate="onmgidApp.music.artist" for="field_artist">artist</label>
+            <label translate="onlinemusicApp.music.artist" for="field_artist">artist</label>
             <select class="form-control" id="field_artist" name="artist" ng-model="music.artist" ng-options="artist as artist.id for artist in artists track by artist.id">
                 <option value=""></option>
             </select>
@@ -91,6 +85,12 @@
         <div class="form-group">
             <label translate="onlinemusicApp.music.genre" for="field_genre">genre</label>
             <select class="form-control" id="field_genre" multiple name="genre" ng-model="music.genres" ng-options="genre as genre.id for genre in genres track by genre.id"></select>
+        </div>
+        <div class="form-group">
+            <label translate="onlinemusicApp.music.album" for="field_album">album</label>
+            <select class="form-control" id="field_album" name="album" ng-model="music.album" ng-options="album as album.id for album in albums track by album.id">
+                <option value=""></option>
+            </select>
         </div>
     </div>
     <div class="modal-footer">

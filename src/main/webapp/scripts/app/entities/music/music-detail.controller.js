@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('onlinemusicApp')
-    .controller('MusicDetailController', function ($scope, $rootScope, $stateParams, entity, Music, Artist, Genre) {
+    .controller('MusicDetailController', function ($scope, $rootScope, $stateParams, entity, Music, Artist, Genre, Album) {
         $scope.music = entity;
         $scope.load = function (id) {
             Music.get({id: id}, function(result) {

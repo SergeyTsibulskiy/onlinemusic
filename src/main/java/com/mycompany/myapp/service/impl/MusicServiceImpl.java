@@ -4,14 +4,13 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import com.mycompany.myapp.domain.Album;
 import com.mycompany.myapp.domain.Artist;
 import com.mycompany.myapp.domain.Genre;
 import com.mycompany.myapp.repository.ArtistRepository;
 import com.mycompany.myapp.repository.GenreRepository;
-import com.mycompany.myapp.service.ArtistService;
-import com.mycompany.myapp.service.GenreService;
-import com.mycompany.myapp.service.GoogleDriveService;
-import com.mycompany.myapp.service.MusicService;
+import com.mycompany.myapp.repository.search.MusicSearchRepository;
+import com.mycompany.myapp.service.*;
 import com.mycompany.myapp.domain.Music;
 import com.mycompany.myapp.repository.MusicRepository;
 import com.mycompany.myapp.repository.search.MusicSearchRepository;
@@ -41,12 +40,15 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @Service
 @Transactional
-public class MusicServiceImpl implements MusicService {
+public class MusicServiceImpl implements MusicService{
 
     private final Logger log = LoggerFactory.getLogger(MusicServiceImpl.class);
 
     @Autowired
     private ArtistService artistService;
+
+    @Autowired
+    private AlbumService albumService;
 
     @Autowired
     private GenreService genreService;
@@ -70,10 +72,9 @@ public class MusicServiceImpl implements MusicService {
     public Music save(Music music) {
         log.debug("Request to save Music : {}", music);
         saveArtist(music);
+        saveAlbum(music);
         saveGenres(music);
         Music result = musicRepository.save(music);
-        musicSearchRepository.save(result);
-
         return result;
     }
 
@@ -129,7 +130,7 @@ public class MusicServiceImpl implements MusicService {
             Music music = new Music();
             String title = id3v2Tag.getTitle().replaceAll(" ", "_").replaceAll("/", "");
             music.setTitle(title);
-            music.setAlbum(id3v2Tag.getAlbum());
+            music.setAlbum(new Album(id3v2Tag.getAlbum()));
             music.setArtist(new Artist(id3v2Tag.getArtist()));
             music.setGenres(new HashSet<>(Collections.singletonList(new Genre(id3v2Tag.getGenreDescription()))));
             music.setYear(id3v2Tag.getYear() != null ? Integer.parseInt(id3v2Tag.getYear()) : 1970);
@@ -181,6 +182,15 @@ public class MusicServiceImpl implements MusicService {
             music.setArtist(existingArtist);
         } else {
             artistService.save(music.getArtist());
+        }
+    }
+
+    private void saveAlbum(Music music) {
+        Album existingAlbum = albumService.findByName(music.getAlbum().getName());
+        if (null != existingAlbum) {
+            music.setAlbum(existingAlbum);
+        } else {
+            albumService.save(music.getAlbum());
         }
     }
 

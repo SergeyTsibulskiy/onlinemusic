@@ -2,9 +2,15 @@
     <div class="row">
         <md-content>
             <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Popular Music">
+                    <md-content class="md-padding poster-music" style="height: 500px" ng-controller="PosterController">
+                        <poster-music load-contents="loadAll"></poster-music>
+                    </md-content>
+                </md-tab>
+
                 <md-tab label="Жанры">
                     <md-content class="md-padding">
-                        <div class="row" ng-controller="GenreController" ng-init="loadAll()">
+                        <div class="" ng-controller="GenreController">
                             <h1 class="md-display-2">Жанры</h1>
                             <div class="genre" ng-repeat="genre in genres track by genre.id">
                                 {{genre.name}}
@@ -14,7 +20,7 @@
                 </md-tab>
                 <md-tab label="Исполнители">
                     <md-content class="md-padding">
-                        <div class="row" ng-controller="ArtistController" ng-init="loadAll()">
+                        <div class="" ng-controller="ArtistController">
                         <h1 class="md-display-2">Исполнители</h1>
                             <div class="genre" ng-repeat="artist in artists track by artist.id">
                                 {{artist.name}}
@@ -24,11 +30,12 @@
                 </md-tab>
                 <md-tab label="Альбомы">
                     <md-content class="md-padding">
-                        <h1 class="md-display-2">Альбомы</h1>
-                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere
-                            molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit
-                            erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac
-                            est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        <div class="" ng-controller="AlbumController">
+                            <h1 class="md-display-2">Исполнители</h1>
+                            <div class="genre" ng-repeat="album in albums track by album.id">
+                                {{album.name}}
+                            </div>
+                        </div>
                     </md-content>
                 </md-tab>
                 <md-tab label="Загрузка">

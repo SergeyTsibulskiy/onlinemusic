@@ -27,8 +27,6 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="album" type="varchar(255)"/>
-            
             <column name="year" type="integer"/>
             
             <column name="comment" type="varchar(255)"/>
@@ -40,6 +38,7 @@
             <column name="download_url" type="varchar(255)"/>
             
             <column name="artist_id" type="bigint"/>
+            <column name="album_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -72,5 +71,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="genre"/>
         
+        <addForeignKeyConstraint baseColumnNames="album_id"
+                                 baseTableName="music"
+                                 constraintName="fk_music_album_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="album"/>
+
     </changeSet>
 </databaseChangeLog>

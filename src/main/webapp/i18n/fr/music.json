@@ -1,5 +1,5 @@
 {
-    "onmgidApp": {
+    "onlinemusicApp": {
         "music" : {
             "home": {
                 "title": "Musics",
@@ -18,14 +18,14 @@
             },
             "head": "Head",
             "title": "Title",
-            "album": "Album",
             "year": "Year",
             "comment": "Comment",
             "cloudId": "CloudId",
             "posterUrl": "PosterUrl",
             "downloadUrl": "DownloadUrl",
             "artist": "Artist",
-            "genre": "Genre"
+            "genre": "Genre",
+            "album": "Album"
         }
     }
 }
