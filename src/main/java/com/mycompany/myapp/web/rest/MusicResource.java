@@ -128,4 +128,17 @@ public class MusicResource {
         log.debug("Request to search Musics for query {}", query);
         return musicService.search(query);
     }
+
+    /**
+     * Test  /musics/search -> test search.
+     */
+    @RequestMapping(value = "/musics/search",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @SuppressWarnings("unchecked")
+    public ResponseEntity<Void> searchMusic() {
+        List<Music> musics = musicService.search("Блукаю", "Вихід є!", "Rock");
+        return null;
+    }
 }

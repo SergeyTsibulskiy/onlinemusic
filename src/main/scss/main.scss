@@ -8,6 +8,7 @@ body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    overflow-x: hidden;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -295,6 +296,10 @@ div#player1 {
     margin-bottom: 0px;
 }
 
+.poster-wrapper {
+    margin-bottom: 2em;
+}
+
 .poster-music {
     font-family: Roboto, sans-serif;
     .container {
@@ -310,7 +315,7 @@ div#player1 {
         background: #ffffff url("https://www.googledrive.com/host/0B8ExDrngxZU8NzJ3dTN2aTR4RXc") no-repeat;
         background-size: 100%;
         width: 550px;
-        height: 375px;
+        height: 320px;
         border-radius: 3px;
         border-bottom: 6px solid #3f51b5;
         box-shadow: 0 0 20px 3px rgba(0, 0, 0, .5);
@@ -471,9 +476,9 @@ div#player1 {
         }
         & .seek-field {
             bottom: 67px;
-            left: 148px;
+            left: 130px;
             position: absolute;
-            width: 170px;
+            width: 140px;
             z-index: 5;
             transform: scale(0);
             display: none;

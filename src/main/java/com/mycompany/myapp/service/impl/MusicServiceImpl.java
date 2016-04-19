@@ -25,6 +25,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.*;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +46,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class MusicServiceImpl implements MusicService{
 
     private final Logger log = LoggerFactory.getLogger(MusicServiceImpl.class);
+
+    @PersistenceContext
+    private EntityManager manager;
 
     @Autowired
     private ArtistService artistService;
@@ -120,6 +126,43 @@ public class MusicServiceImpl implements MusicService{
         return StreamSupport
             .stream(musicSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Music> search(String title, String album, String genre) {
+        CriteriaBuilder cb = manager.getCriteriaBuilder();
+        CriteriaQuery cqry = cb.createQuery();
+        Root<Music> root = cqry.from(Music.class);
+        Join<Music, Genre> genresTable = root.join("genres");
+        Join<Music, Album> albumTable = root.join("album");
+        Predicate pTitle = cb.like(root.get("title"), "%" + title + "%");
+        Predicate pGenre = cb.equal(genresTable.get("name"), genre);
+        Predicate pAlbum = cb.equal(albumTable.get("name"), album);
+        Predicate finalPredicate = null;
+        if (!title.isEmpty()) {
+            finalPredicate = pTitle;
+        }
+
+        if (!genre.isEmpty()) {
+            if (finalPredicate == null) {
+                finalPredicate = pGenre;
+            } else {
+                finalPredicate = cb.and(finalPredicate, pGenre);
+            }
+        }
+
+        if (!album.isEmpty()) {
+            if (finalPredicate == null) {
+                finalPredicate = pAlbum;
+            } else {
+                finalPredicate = cb.and(finalPredicate, pAlbum);
+            }
+        }
+
+        cqry.select(root).where(finalPredicate);
+
+        return manager.createQuery(cqry).getResultList();
     }
 
 
