@@ -2,6 +2,11 @@
     <div class="row">
         <md-content>
             <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Search">
+                    <md-content class="md-padding search" ng-controller="SearchController">
+                        <search></search>
+                    </md-content>
+                </md-tab>
                 <md-tab label="Popular Music">
                     <md-content class="md-padding poster-music" ng-controller="PosterController">
                         <poster-music></poster-music>
