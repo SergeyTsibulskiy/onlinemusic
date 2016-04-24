@@ -140,11 +140,11 @@ public class MusicServiceImpl implements MusicService{
         Predicate pGenre = cb.equal(genresTable.get("name"), genre);
         Predicate pAlbum = cb.equal(albumTable.get("name"), album);
         Predicate finalPredicate = null;
-        if (!title.isEmpty()) {
+        if (title != null && !title.isEmpty()) {
             finalPredicate = pTitle;
         }
 
-        if (!genre.isEmpty()) {
+        if (genre != null && !genre.isEmpty()) {
             if (finalPredicate == null) {
                 finalPredicate = pGenre;
             } else {
@@ -152,7 +152,7 @@ public class MusicServiceImpl implements MusicService{
             }
         }
 
-        if (!album.isEmpty()) {
+        if (album != null && !album.isEmpty()) {
             if (finalPredicate == null) {
                 finalPredicate = pAlbum;
             } else {

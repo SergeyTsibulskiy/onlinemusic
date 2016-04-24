@@ -133,12 +133,13 @@ public class MusicResource {
      * Test  /musics/search -> test search.
      */
     @RequestMapping(value = "/musics/search",
-        method = RequestMethod.GET,
+        method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @SuppressWarnings("unchecked")
-    public ResponseEntity<Void> searchMusic() {
-        List<Music> musics = musicService.search("Блукаю", "Вихід є!", "Rock");
-        return null;
+    public ResponseEntity<List<Music>> searchMusic(@RequestParam(required = false) String query, @RequestParam String album, @RequestParam String genre) {
+        List<Music> musics = musicService.search(query, album, genre);
+
+        return new ResponseEntity<>(musics, HttpStatus.OK);
     }
 }
