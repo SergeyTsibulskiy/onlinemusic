@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('onlinemusicApp')
-    .controller('ArtistController', function ($scope, $state, Artist, ArtistSearch, ParseLinks) {
-
+    .controller('ArtistController', function ($scope, $state, Artist, ArtistSearch, ParseLinks, Music) {
+        $scope.musics = {};
         $scope.artists = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
@@ -35,6 +35,21 @@ angular.module('onlinemusicApp')
                     $scope.loadAll();
                 }
             });
+        };
+
+        $scope.loadByArtist = function (artist) {
+            $scope.musics[artist] = [];
+            Music.search({query: '', album: artist, genre: '' }, function (result, headers) {
+                _.forEach(result, function (value, key) {
+                    $scope.musics[artist].push({
+                        title: value.title,
+                        author: value.artist.name,
+                        url: value.downloadUrl,
+                        duration: moment.duration(value.duration),
+                        pic: value.posterUrl != null ? value.posterUrl : 'https://www.googledrive.com/host/0B8ExDrngxZU8NzJ3dTN2aTR4RXc'
+                    });
+                });
+            })
         };
 
         $scope.refresh = function () {

@@ -133,7 +133,9 @@ angular.module('onlinemusicApp')
             restrict: 'E',
             templateUrl: "/scripts/app/main/music/poster/poster.html",
             controller: controller,
-            scope: false,
+            scope: {
+                musics: '='
+            },
             link: link
         };
     });

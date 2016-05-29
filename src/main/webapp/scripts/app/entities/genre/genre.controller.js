@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('onlinemusicApp')
-    .controller('GenreController', function ($scope, $state, Genre, GenreSearch, ParseLinks) {
-
+    .controller('GenreController', function ($scope, $state, Genre, GenreSearch, ParseLinks, Music) {
+        $scope.musics = {};
         $scope.genres = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
@@ -34,6 +34,28 @@ angular.module('onlinemusicApp')
                 if(response.status === 404) {
                     $scope.loadAll();
                 }
+            });
+        };
+
+        $scope.loadByGenre = function (genre) {
+            $scope.musics[genre] = [];
+            Music.search({query: '', album: '', genre: genre }, function (result, headers) {
+                _.forEach(result, function (value, key) {
+                    $scope.musics[genre].push({
+                        title: value.title,
+                        author: value.artist.name,
+                        url: value.downloadUrl,
+                        duration: moment.duration(value.duration),
+                        pic: value.posterUrl != null ? value.posterUrl : 'https://www.googledrive.com/host/0B8ExDrngxZU8NzJ3dTN2aTR4RXc'
+                    });
+                });
+            })
+        };
+
+        $scope.loadByGenres = function () {
+
+            _.each($scope.genres, function (genre) {
+                $scope.loadByGenre(genre.name);
             });
         };
 

@@ -130,15 +130,17 @@ public class MusicServiceImpl implements MusicService{
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Music> search(String title, String album, String genre) {
+    public List<Music> search(String title, String artist, String album, String genre) {
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery cqry = cb.createQuery();
         Root<Music> root = cqry.from(Music.class);
         Join<Music, Genre> genresTable = root.join("genres");
         Join<Music, Album> albumTable = root.join("album");
+        Join<Music, Artist> artistTable = root.join("artist");
         Predicate pTitle = cb.like(root.get("title"), "%" + title + "%");
         Predicate pGenre = cb.equal(genresTable.get("name"), genre);
         Predicate pAlbum = cb.equal(albumTable.get("name"), album);
+        Predicate pArtist = cb.equal(artistTable.get("name"), artist);
         Predicate finalPredicate = null;
         if (title != null && !title.isEmpty()) {
             finalPredicate = pTitle;
@@ -157,6 +159,14 @@ public class MusicServiceImpl implements MusicService{
                 finalPredicate = pAlbum;
             } else {
                 finalPredicate = cb.and(finalPredicate, pAlbum);
+            }
+        }
+
+        if (artist != null && !artist.isEmpty()) {
+            if (finalPredicate == null) {
+                finalPredicate = pArtist;
+            } else {
+                finalPredicate = cb.and(finalPredicate, pArtist);
             }
         }
 
@@ -224,7 +234,7 @@ public class MusicServiceImpl implements MusicService{
         Artist existingArtist = artistService.findByName(music.getArtist().getName());
         if (null != existingArtist) {
             music.setArtist(existingArtist);
-        } else {
+        } else if (music.getArtist().getName() != null) {
             artistService.save(music.getArtist());
         }
     }
@@ -233,7 +243,7 @@ public class MusicServiceImpl implements MusicService{
         Album existingAlbum = albumService.findByName(music.getAlbum().getName());
         if (null != existingAlbum) {
             music.setAlbum(existingAlbum);
-        } else {
+        } if (music.getAlbum().getName() != null) {
             albumService.save(music.getAlbum());
         }
     }
@@ -245,7 +255,7 @@ public class MusicServiceImpl implements MusicService{
             Genre exitGenre = genreService.findByName(genre.getName());
             if (exitGenre != null) {
                 processedGenres.add(exitGenre);
-            } else {
+            } else if (genre.getName() != null) {
                 genreService.save(genre);
                 processedGenres.add(genre);
             }

@@ -6,10 +6,12 @@ angular.module('onlinemusicApp')
         var controller = function ($scope, $attrs, $injector) {
             var genreService = $injector.get($attrs.genreService);
             var albumService = $injector.get($attrs.albumService);
+            var artistService = $injector.get($attrs.artistService);
             var musicService = $injector.get($attrs.musicService);
             $scope.form = {};
             $scope.genres = [];
             $scope.albums = [];
+            $scope.artists = [];
             $scope.musics = [];
             $scope.predicate = 'id';
             $scope.reverse = true;
@@ -35,11 +37,22 @@ angular.module('onlinemusicApp')
                 }
             };
 
+            $scope.loadArtists = function () {
+                if ($scope.artists.length == 0) {
+                    artistService.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                        for (var i = 0; i < result.length; i++) {
+                            $scope.artists.push(result[i]);
+                        }
+                    });
+                }
+            };
+
             $scope.search = function (form) {
                 var album = _.isUndefined(form.album) ? '' : form.album.name;
+                var artist = _.isUndefined(form.artist) ? '' : form.artist.name;
                 var genre = _.isUndefined(form.genre) ? '' : form.genre.name;
                 var query = _.isUndefined(form.query) ? '' : form.query;
-                musicService.search({query: query, album: album, genre: genre }, function (result, headers) {
+                musicService.search({query: query, artist: artist, album: album, genre: genre }, function (result, headers) {
                     $scope.musics = [];
                     _.forEach(result, function (value, key) {
                         $scope.musics.push({
@@ -50,8 +63,6 @@ angular.module('onlinemusicApp')
                             pic: value.posterUrl != null ? value.posterUrl : 'https://www.googledrive.com/host/0B8ExDrngxZU8NzJ3dTN2aTR4RXc'
                         });
                     });
-
-                    // dataService.musics = $scope.musics;
                 })
             }
         };
@@ -64,7 +75,9 @@ angular.module('onlinemusicApp')
             restrict: 'E',
             templateUrl: "/scripts/app/main/music/search/search.html",
             controller: controller,
-            scope: false,
+            scope: {
+                musics: '='
+            },
             link: link
         };
     });

@@ -45,7 +45,7 @@ public interface MusicService {
      */
     public List<Music> search(String query);
 
-    public List search(String title, String album, String genre);
+    public List search(String title, String artist, String album, String genre);
 
     public Music getMetaData(File file) throws IOException, UnsupportedTagException, InvalidDataException;
 

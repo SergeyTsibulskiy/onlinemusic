@@ -19,6 +19,7 @@ angular.module('onlinemusicApp')
                 isArray: true,
                 params: {
                     query: '@query',
+                    artist: '@artist',
                     album: '@album',
                     genre: '@genre'
                 }
