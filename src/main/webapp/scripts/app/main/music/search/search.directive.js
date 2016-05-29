@@ -36,9 +36,12 @@ angular.module('onlinemusicApp')
             };
 
             $scope.search = function (form) {
-                musicService.search({query: form.query, album: form.album.name, genre: form.genre.name }, function (result, headers) {
+                var album = _.isUndefined(form.album) ? '' : form.album.name;
+                var genre = _.isUndefined(form.genre) ? '' : form.genre.name;
+                var query = _.isUndefined(form.query) ? '' : form.query;
+                musicService.search({query: query, album: album, genre: genre }, function (result, headers) {
+                    $scope.musics = [];
                     _.forEach(result, function (value, key) {
-                        $scope.musics = [];
                         $scope.musics.push({
                             title: value.title,
                             author: value.artist.name,
