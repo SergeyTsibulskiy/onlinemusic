@@ -137,8 +137,8 @@ public class MusicResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @SuppressWarnings("unchecked")
-    public ResponseEntity<List<Music>> searchMusic(@RequestParam(required = false) String query, @RequestParam String artist, @RequestParam String album, @RequestParam String genre) {
-        List<Music> musics = musicService.search(query, artist, album, genre);
+    public ResponseEntity<List<Music>> searchMusic(@RequestParam(required = false) String query, @RequestParam String album, @RequestParam String genre) {
+        List<Music> musics = musicService.search(query, "", album, genre);
 
         return new ResponseEntity<>(musics, HttpStatus.OK);
     }
