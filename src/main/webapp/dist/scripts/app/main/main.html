@@ -1,0 +1,48 @@
+<div ng-cloak>
+    <div class="row">
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Жанры">
+                    <md-content class="md-padding">
+                        <div class="row" ng-controller="GenreController" ng-init="loadAll()">
+                            <h1 class="md-display-2">Жанры</h1>
+                            <div class="genre" ng-repeat="genre in genres track by genre.id">
+                                {{genre.name}}
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Исполнители">
+                    <md-content class="md-padding">
+                        <div class="row" ng-controller="ArtistController" ng-init="loadAll()">
+                        <h1 class="md-display-2">Исполнители</h1>
+                            <div class="genre" ng-repeat="artist in artists track by artist.id">
+                                {{artist.name}}
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Альбомы">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Альбомы</h1>
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere
+                            molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit
+                            erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac
+                            est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Загрузка">
+                    <md-content class="md-padding">
+                        <h1 class="md-display-2">Загрузка</h1>
+                        <div class="row" ng-controller="UploadController">
+                            <form method="POST" enctype="multipart/form-data">
+                                Please select a file to upload : <input id="file" type="file" name="file" multiple/>
+                                <input type="submit" value="upload" ng-click="uploadFile()"/>
+                            </form>
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</div>

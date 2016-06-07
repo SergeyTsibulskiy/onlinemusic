@@ -1,0 +1,104 @@
+
+<div>
+    <h2><span translate="onlinemusicApp.music.detail.title">Music</span> {{music.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.head">Head</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.head}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.title">Title</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.title}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.year">Year</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.year}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.comment">Comment</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.comment}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.cloudId">CloudId</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.cloudId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.posterUrl">PosterUrl</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.posterUrl}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.downloadUrl">DownloadUrl</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{music.downloadUrl}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.artist">artist</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="artist.detail({id:music.artist.id})">{{music.artist.id}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.genre">genre</span>
+                </td>
+                <td>
+                    <span ng-repeat="genre in music.genres">
+                        <a class="form-control-static" ui-sref="genre.detail({id: {{genre.id}}})">{{genre.id}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="onlinemusicApp.music.album">album</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="album.detail({id:music.album.id})">{{music.album.id}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>
