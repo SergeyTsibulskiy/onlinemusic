@@ -203,7 +203,7 @@ public class MusicServiceImpl implements MusicService{
     }
 
 
-    public void saveMusic(String name, String contentType, InputStream inputStream) {
+    public Music saveMusic(String name, String contentType, InputStream inputStream) {
         try {
             byte[] bytes = IOUtils.toByteArray(inputStream);
             File tempFile = File.createTempFile("tmp", "mp3", null);
@@ -217,7 +217,7 @@ public class MusicServiceImpl implements MusicService{
                     com.google.api.services.drive.model.File savedFile = driveService.uploadFile(name, contentType, new FileInputStream(tempFile));
                     music.setCloudId(savedFile.getId());
                     music.setDownloadUrl(savedFile.getWebContentLink());
-                    this.save(music);
+                    return this.save(music);
                 } else {
                     log.warn("This:" + name + " song is exist");
                 }
@@ -227,6 +227,8 @@ public class MusicServiceImpl implements MusicService{
         } catch (IOException | UnsupportedTagException | InvalidDataException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
 
 

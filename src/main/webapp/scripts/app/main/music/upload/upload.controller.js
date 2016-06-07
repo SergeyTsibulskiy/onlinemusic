@@ -17,6 +17,10 @@ angular.module('onlinemusicApp')
             $http.post('/api/drive/music/upload/',  formData, {
                 headers: { 'Content-Type': undefined },
                 transformRequest: angular.identity
-            })
+            }).then(function successCallback(response) {
+                alert('Success: ' + response.statusText);
+            }, function errorCallback(response) {
+                alert('Error: ' + response.statusText);
+            });
         }
     });

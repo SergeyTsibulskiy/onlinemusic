@@ -11,6 +11,7 @@ import com.mycompany.myapp.domain.Genre;
 import com.mycompany.myapp.domain.Music;
 import com.mycompany.myapp.service.GoogleDriveService;
 import com.mycompany.myapp.service.MusicService;
+import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -72,15 +74,18 @@ public class DriveResource {
     @RequestMapping(value = "/drive/music/upload", method = RequestMethod.POST)
     @Timed
     @ResponseBody
-    public ResponseEntity.BodyBuilder uploadFileHandler(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity uploadFileHandler(@RequestParam("file") MultipartFile file) throws URISyntaxException {
+        Music result = null;
         try {
             InputStream input = file.getInputStream();
-            musicService.saveMusic(file.getOriginalFilename(), file.getContentType(), input);
+            result = musicService.saveMusic(file.getOriginalFilename(), file.getContentType(), input);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return ResponseEntity.ok();
+        return ResponseEntity.created(new URI("/api/musics/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert("music", result.getId().toString()))
+            .body(result);
     }
 
     /**

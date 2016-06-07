@@ -49,5 +49,5 @@ public interface MusicService {
 
     public Music getMetaData(File file) throws IOException, UnsupportedTagException, InvalidDataException;
 
-    public void saveMusic(String name, String contentType,  InputStream inputStream);
+    public Music saveMusic(String name, String contentType,  InputStream inputStream);
 }
