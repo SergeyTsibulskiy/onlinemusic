@@ -30,7 +30,7 @@ angular.module('onlinemusicApp')
                 });
             })
         };
-        
+
         $scope.reset = function() {
             $scope.page = 0;
             $scope.albums = [];

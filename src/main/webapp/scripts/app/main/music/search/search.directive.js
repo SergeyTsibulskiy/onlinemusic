@@ -19,6 +19,7 @@ angular.module('onlinemusicApp')
 
             $scope.loadGenres = function () {
                 if ($scope.genres.length == 0) {
+                    $scope.genres.push('');
                     genreService.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                         for (var i = 0; i < result.length; i++) {
                             $scope.genres.push(result[i]);
@@ -30,6 +31,7 @@ angular.module('onlinemusicApp')
             $scope.loadAlbums = function () {
                 if ($scope.albums.length == 0) {
                     albumService.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                        $scope.albums.push('');
                         for (var i = 0; i < result.length; i++) {
                             $scope.albums.push(result[i]);
                         }
@@ -40,6 +42,7 @@ angular.module('onlinemusicApp')
             $scope.loadArtists = function () {
                 if ($scope.artists.length == 0) {
                     artistService.query({page: $scope.page, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                        $scope.artists.push('');
                         for (var i = 0; i < result.length; i++) {
                             $scope.artists.push(result[i]);
                         }
