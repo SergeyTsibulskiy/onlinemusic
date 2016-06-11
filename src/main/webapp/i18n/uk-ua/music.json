@@ -3,15 +3,12 @@
         "music" : {
             "home": {
                 "title": "Musics",
-                "createLabel": "Créer un nouveau Music",
-                "createOrEditLabel": "Créer ou éditer un Music",
+                "createLabel": "Create a new Music",
+                "createOrEditLabel": "Create or edit a Music",
                 "search": "Search for Music"
             },
-            "created": "Un nouveau Music a été créé avec l'identifiant {{ param }}",
-            "updated": "Le Music avec l'identifiant {{ param }} a été mis à jour",
-            "deleted": "Le Music avec l'identifiant {{ param }} a été supprimé",
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Music {{ id }} ?"
+                "question": "Are you sure you want to delete Music {{ id }}?"
             },
             "detail": {
                 "title": "Music"
@@ -30,4 +27,3 @@
         }
     }
 }
-

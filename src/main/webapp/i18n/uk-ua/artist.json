@@ -1,0 +1,20 @@
+{
+    "onlinemusicApp": {
+        "artist" : {
+            "home": {
+                "title": "Artists",
+                "createLabel": "Create a new Artist",
+                "createOrEditLabel": "Create or edit a Artist",
+                "search": "Search for Artist"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Artist {{ id }}?"
+            },
+            "detail": {
+                "title": "Artist"
+            },
+            "name": "Name",
+            "musiks": "Musiks"
+        }
+    }
+}

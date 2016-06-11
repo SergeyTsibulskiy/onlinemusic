@@ -5838,6 +5838,13 @@ body {
   background-position: center center;
   background-repeat: no-repeat; }
 
+md-tab-content {
+  margin-right: 15px;
+  margin-left: 15px; }
+  md-tab-content .row {
+    margin-right: 0;
+    margin-left: 0; }
+
 .navbar-version {
   font-size: 10px;
   color: #ccc; }

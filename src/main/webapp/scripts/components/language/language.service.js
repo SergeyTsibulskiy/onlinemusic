@@ -27,8 +27,9 @@ angular.module('onlinemusicApp')
  They are written in English to avoid character encoding issues (not a perfect solution)
  */
     .constant('LANGUAGES', [
-        'en', 'fr'
-        ,'ru'
+        'en',
+        'ru',
+        'uk-ua'
         // jhipster-needle-006 - JHipster will add new languages here
     ]
 );

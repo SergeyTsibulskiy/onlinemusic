@@ -1,0 +1,20 @@
+{
+    "onlinemusicApp": {
+        "album" : {
+            "home": {
+                "title": "Albums",
+                "createLabel": "Create a new Album",
+                "createOrEditLabel": "Create or edit a Album",
+                "search": "Search for Album"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Album {{ id }}?"
+            },
+            "detail": {
+                "title": "Album"
+            },
+            "name": "Name",
+            "musiks": "Musiks"
+        }
+    }
+}

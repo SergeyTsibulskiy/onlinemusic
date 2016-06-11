@@ -3,60 +3,75 @@
         <md-content>
             <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab label="Search">
-                    <md-content class="md-padding search poster-music" ng-controller="SearchController">
+                    <md-tab-label>
+                        <h4 translate="main.custom.search">Search</h4>
+                    </md-tab-label>
+                    <md-tab-body class="md-padding search poster-music" ng-controller="SearchController">
                         <search artist-service="Artist" genre-service="Genre" album-service="Album" music-service="Music"></search>
-                    </md-content>
+                    </md-tab-body>
                 </md-tab>
 
-                <md-tab label="Жанры">
-                    <md-content class="md-padding">
+                <md-tab>
+                    <md-tab-label>
+                        <h4 translate="main.custom.genre">Genre</h4>
+                    </md-tab-label>
+                    <md-tab-body class="md-padding">
                         <div class="" ng-controller="GenreController">
-                            <h1 class="md-display-2">Жанры</h1>
+                            <h1 class="md-display-2" translate="main.custom.genre">Genre</h1>
                             <div class="genre poster-music" ng-repeat="genre in genres track by genre.id">
                                 {{genre.name}}
-                                <button class="btn btn-primary" ng-click="loadByGenre(genre.name)">Load Musics</button>
+                                <button class="btn btn-primary" ng-click="loadByGenre(genre.name)" translate="main.custom.loadmusic">Load Musics</button>
 
                                 <poster-music musics="musics[genre.name]"></poster-music>
                             </div>
                         </div>
-                    </md-content>
+                    </md-tab-body>
                 </md-tab>
-                <md-tab label="Исполнители">
-                    <md-content class="md-padding">
+                <md-tab>
+                    <md-tab-label>
+                        <h4 translate="main.custom.actors">Actors</h4>
+                    </md-tab-label>
+                    <md-tab-body>
                         <div class="" ng-controller="ArtistController">
                         <h1 class="md-display-2">Исполнители</h1>
                             <div class="genre poster-music" ng-repeat="artist in artists track by artist.id">
                                 {{artist.name}}
-                                <button class="btn btn-primary" ng-click="loadByArtist(artist.name)">Load Musics</button>
+                                <button class="btn btn-primary" ng-click="loadByArtist(artist.name) " translate="main.custom.loadmusic">Load Musics</button>
 
                                 <poster-music musics="musics[artist.name]"></poster-music>
                             </div>
                         </div>
-                    </md-content>
+                    </md-tab-body>
                 </md-tab>
-                <md-tab label="Альбомы">
-                    <md-content class="md-padding">
+                <md-tab>
+                    <md-tab-label>
+                        <h4 translate="main.custom.albums">Albums</h4>
+                    </md-tab-label>
+                    <md-tab-body class="md-padding">
                         <div class="" ng-controller="AlbumController">
-                            <h1 class="md-display-2">Исполнители</h1>
+                            <h1 class="md-display-2" translate="main.custom.albums">Albums</h1>
                             <div class="genre poster-music" ng-repeat="album in albums track by album.id">
                                 {{album.name}}
-                                <button class="btn btn-primary" ng-click="loadByAlbum(album.name)">Load Musics</button>
+                                <button class="btn btn-primary" ng-click="loadByAlbum(album.name)" translate="main.custom.loadmusic">Load Musics</button>
 
                                 <poster-music musics="musics[album.name]"></poster-music>
                             </div>
                         </div>
-                    </md-content>
+                    </md-tab-body>
                 </md-tab>
-                <md-tab label="Загрузка">
-                    <md-content class="md-padding">
-                        <h1 class="md-display-2">Загрузка</h1>
+                <md-tab>
+                    <md-tab-label>
+                        <h4 translate="main.custom.load">Load</h4>
+                    </md-tab-label>
+                    <md-tab-body class="md-padding">
+                        <h1 class="md-display-2" translate="main.custom.load">Load</h1>
                         <div class="row" ng-controller="UploadController">
                             <form method="POST" enctype="multipart/form-data">
                                 Please select a file to upload : <input id="file" type="file" name="file" multiple/>
                                 <input type="submit" value="upload" ng-click="uploadFile()"/>
                             </form>
                         </div>
-                    </md-content>
+                    </md-tab-body>
                 </md-tab>
             </md-tabs>
         </md-content>

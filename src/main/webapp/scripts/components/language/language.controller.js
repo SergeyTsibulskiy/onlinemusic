@@ -30,6 +30,7 @@ angular.module('onlinemusicApp')
                 "pt-br": "Português (Brasil)",
                 "pt-pt": "Português",
                 "ro": "Română",
+                "uk-ua": "Українська",
                 "ru": "Русский",
                 "sv": "Svenska",
                 "ta": "தமிழ்",
